@@ -18,7 +18,8 @@ async function iniciarQuiz(nombreTema) {
         const fin = texto.lastIndexOf('}') + 1;
         const json = JSON.parse(texto.substring(inicio, fin));
         
-        preguntas = json.table.rows.map(row => ({
+        // Con .slice(1) le decimos: "salta la primera fila y quédate con el resto"
+        preguntas = json.table.rows.slice(1).map(row => ({
             pregunta: row.c[0] ? row.c[0].v : '',
             a: row.c[1] ? row.c[1].v : '',
             b: row.c[2] ? row.c[2].v : '',
@@ -88,4 +89,5 @@ function mostrarFinal() {
         <p>Has acertado <strong>${aciertos}</strong> de <strong>${preguntas.length}</strong></p>
         <p>Puntuación: ${porcentaje}%</p>
     `;
+
 }
