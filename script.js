@@ -4,7 +4,7 @@ let indicePregunta = 0;
 let aciertos = 0;
 let fallos = 0;
 let blancos = 0;
-const PENALIZACION = 0.25; // Según tu ejemplo: 10 errores restan 2,5 puntos (10 * 0.25)
+const PENALIZACION = 0.25; 
 
 async function prepararQuiz() {
     const checks = document.querySelectorAll('.tema-check:checked');
@@ -15,9 +15,8 @@ async function prepararQuiz() {
         return;
     }
 
-    // Reset de contadores
     aciertos = 0; fallos = 0; blancos = 0; indicePregunta = 0;
-    document.getElementById('pantalla-inicio').innerHTML = "<h2>Cargando y mezclando temas...</h2>";
+    document.getElementById('pantalla-inicio').innerHTML = "<h2>Cargando temas...</h2>";
     preguntasTotales = [];
 
     for (let check of checks) {
@@ -52,13 +51,11 @@ function mostrarPregunta() {
         mostrarFinal();
         return;
     }
-
     document.getElementById('btn-siguiente').classList.add('oculto');
-    document.getElementById('btn-blanco').classList.remove('oculto'); // Mostrar botón blanco
+    document.getElementById('btn-blanco').classList.remove('oculto');
     let p = preguntasTotales[indicePregunta];
     document.getElementById('contador').innerText = `Pregunta ${indicePregunta + 1} de ${preguntasTotales.length}`;
     document.getElementById('pregunta').innerText = p.pregunta;
-    
     document.getElementById('opciones').innerHTML = `
         <button onclick="verificar('a', this)">${p.a}</button>
         <button onclick="verificar('b', this)">${p.b}</button>
@@ -70,10 +67,8 @@ function mostrarPregunta() {
 function verificar(respuestaUsuario, boton) {
     let correcta = preguntasTotales[indicePregunta].correcta;
     let botones = document.getElementById('opciones').getElementsByTagName('button');
-
     for (let b of botones) { b.disabled = true; }
     document.getElementById('btn-blanco').classList.add('oculto');
-
     if (respuestaUsuario === correcta) {
         boton.style.backgroundColor = "#4CAF50"; 
         boton.style.color = "white";
@@ -104,17 +99,14 @@ function siguiente() {
 function mostrarFinal() {
     document.getElementById('pantalla-quiz').classList.add('oculto');
     document.getElementById('pantalla-final').classList.remove('oculto');
-    
     let notaFinal = aciertos - (fallos * PENALIZACION);
     if (notaFinal < 0) notaFinal = 0;
-
     document.getElementById('resultado').innerHTML = `
         <h2>Resultados</h2>
         <p>✅ Enciertos: <strong>${aciertos}</strong></p>
         <p>❌ Errades: <strong>${fallos}</strong> (-${(fallos * PENALIZACION).toFixed(2)})</p>
-        <p>⚪ En blanc: <strong>${blancos}</strong> (no resta)</p>
+        <p>⚪ En blanc: <strong>${blancos}</strong></p>
         <hr>
         <h1 style="color: #2196F3;">NOTA: ${notaFinal.toFixed(2)}</h1>
     `;
 }
-
