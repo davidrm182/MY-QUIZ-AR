@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Super Quiz</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial; max-width: 600px; margin: auto; padding: 20px; background-color: #f4f4f9; }
+        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        button { display: block; width: 100%; padding: 12px; margin: 10px 0; font-size: 16px; cursor: pointer; border-radius: 8px; border: 1px solid #ddd; transition: 0.3s; }
+        button:hover { background-color: #eef; }
+        #pregunta { font-size: 20px; font-weight: bold; margin-bottom: 20px; }
+        #resultado { font-size: 24px; text-align: center; color: #333; }
+        .oculto { display: none; }
+        #contador { color: #666; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <div id="pantalla-inicio" class="card">
+        <h1>Selecciona Tema</h1>
+        <button onclick="iniciarQuiz('tema1')">Tema 1</button>
+        <button onclick="iniciarQuiz('tema2')">Tema 2</button>
+        </div>
+
+    <div id="pantalla-quiz" class="card oculto">
+        <h2 id="contador"></h2>
+        <div id="pregunta"></div>
+        <div id="opciones"></div>
+        <button id="btn-siguiente" class="oculto" onclick="siguiente()" style="background: #2196F3; color: white;">Siguiente Pregunta</button>
+    </div>
+
+    <div id="pantalla-final" class="card oculto">
+        <div id="resultado"></div>
+        <button onclick="location.reload()">Volver a empezar</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
